@@ -220,4 +220,8 @@ with gr.Blocks(theme=masterbrand_theme, css=custom_css, title="MasterBrand AI As
 
 # ==== Launch ====
 if __name__ == "__main__":
-    demo.queue(max_size=10).launch()
+    # Check if running on Render
+    if os.environ.get("RENDER") == "true":
+        demo.queue(max_size=10).launch(server_name="0.0.0.0", server_port=10000)
+    else:
+        demo.queue(max_size=10).launch()
