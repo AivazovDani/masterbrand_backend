@@ -4,7 +4,13 @@ from langdetect import detect
 from huggingface_hub import login
 import os
 
-login(token=os.getenv("HF_Token"))
+hf_token = os.getenv("HF_Tokenn")
+
+if hf_token:
+    login(token=hf_token)
+else:
+    print("⚠️ Warning: HF_Tokenn not found. Skipping Hugging Face login.")
+
 generator = pipeline("text-generation", model="mistralai/Mistral-7B-Instruct-v0.1")
 bg_to_en = pipeline("translation", model="Helsinki-NLP/opus-mt-bg-en")
 en_to_bg = pipeline("translation", model="Helsinki-NLP/opus-mt-en-bg")
